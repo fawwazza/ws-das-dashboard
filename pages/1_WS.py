@@ -5,8 +5,6 @@ from streamlit_folium import st_folium
 
 from utils import load_csv, load_geojson, COL_WS_NAME, COL_PROVINSI_NAME, COL_KABKOTA_NAME
 
-st.set_page_config(page_title="WS - Dashboard WS & DAS", page_icon="🌊", layout="wide")
-
 st.title("Eksplorasi Wilayah Sungai (WS)")
 
 # --- Load data ---

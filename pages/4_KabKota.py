@@ -4,8 +4,6 @@ from streamlit_folium import st_folium
 
 from utils import load_csv, load_geojson, COL_KABKOTA_NAME, COL_WS_NAME, COL_DAS_NAME
 
-st.set_page_config(page_title="Kab/Kota - Dashboard WS & DAS", page_icon="🌊", layout="wide")
-
 st.title("Eksplorasi per Kabupaten/Kota")
 
 # --- Load data ---

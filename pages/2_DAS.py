@@ -5,8 +5,6 @@ from streamlit_folium import st_folium
 
 from utils import load_csv, load_geojson, COL_DAS_NAME, COL_DAS_WS_INDUK, COL_PROVINSI_NAME, COL_KABKOTA_NAME
 
-st.set_page_config(page_title="DAS - Dashboard WS & DAS", page_icon="🌊", layout="wide")
-
 st.title("Eksplorasi Daerah Aliran Sungai (DAS)")
 st.caption(
     "Karena jumlah DAS sangat banyak (~42 ribu), pilih WS terlebih dahulu "
