@@ -2,12 +2,12 @@ import streamlit as st
 from utils import load_all_master_tables
 
 st.set_page_config(
-    page_title="Dashboard WS Indonesia",
+    page_title="Dashboard Informasi Wilayah Sungai Indonesia",
     page_icon="🌏",
     layout="wide",
 )
 
-st.title("🌏 Dashboard Wilayah Sungai Indonesia")
+st.title("🌏 Dashboard Informasi Wilayah Sungai Indonesia")
 st.markdown(
     "Eksplorasi data Wilayah Sungai (WS), Daerah Aliran Sungai (DAS), "
     "dan relasinya dengan wilayah administratif (Provinsi & Kabupaten/Kota) "
@@ -15,8 +15,8 @@ st.markdown(
 )
 
 st.markdown(
-    "Dashboard ini menyediakan informasi spasial Wilayah Sungai (WS) dan Daerah Aliran Sungai (DAS) di Indonesia."
-    "Pengguna dapat menelusuri hubungan WS, DAS, provinsi, dan kabupaten/kota secara interaktif untuk mendukung analisis, perencanaan,"
+    "Dashboard ini menyediakan informasi spasial Wilayah Sungai (WS) dan Daerah Aliran Sungai (DAS) di Indonesia. "
+    "Pengguna dapat menelusuri hubungan WS, DAS, provinsi, dan kabupaten/kota secara interaktif untuk mendukung analisis, perencanaan, "
     "serta pengambilan keputusan di bidang sumber daya air."
 )
 
@@ -40,7 +40,7 @@ st.divider()
 st.markdown(
     """
     ### Mulai eksplorasi
-    Pilih menu pada sidebar untuk menelusuri data berdasarkan kebutuhan Anda.
+    Pilih menu pada sidebar untuk menelusuri data berdasarkan kebutuhan.
 
     - **WS** — Menampilkan luas WS, jumlah DAS, serta provinsi dan kabupaten/kota yang berada di dalam suatu WS.
     - **DAS** — Menampilkan informasi DAS beserta Wilayah Sungai induknya, dan kabupaten/kota yang dilintasi DAS tersebut.
@@ -49,13 +49,10 @@ st.markdown(
     """
 )
 
-st.caption(
-    "Dashboard ini dikembangkan untuk mendukung eksplorasi dan analisis data "
-    "Wilayah Sungai (WS) dan Daerah Aliran Sungai (DAS) di Indonesia."
-)
+st.divider()
 
 st.caption(
-    "Subdit Keterpaduan Pengelolaan Sumber Daya Air"
-    "Direktorat Jenderal Sumber Daya Air"
+    "Subdit Keterpaduan Pengelolaan Sumber Daya Air \n\n"
+    "Direktorat Jenderal Sumber Daya Air \n\n"
     "Kementerian Pekerjaan Umum" 
 )
