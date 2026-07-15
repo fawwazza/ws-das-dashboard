@@ -38,7 +38,7 @@ def load_geojson(filename: str) -> gpd.GeoDataFrame:
 
 @st.cache_data
 def load_all_master_tables():
-    """Load semua tabel master sekaligus, dipakai di halaman landing (app.py)."""
+    """Load semua tabel master sekaligus, dipakai di halaman landing (Beranda.py)."""
     return {
         "ws": load_csv("ws_master.csv"),
         "das": load_csv("das_master.csv"),
