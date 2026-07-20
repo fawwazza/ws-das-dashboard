@@ -38,10 +38,35 @@ def load_geojson(filename: str) -> gpd.GeoDataFrame:
 
 @st.cache_data
 def load_all_master_tables():
-    """Load semua tabel master sekaligus, dipakai di halaman landing (Beranda.py)."""
+    """Load semua tabel master sekaligus, dipakai di halaman landing (app.py)."""
     return {
         "ws": load_csv("ws_master.csv"),
         "das": load_csv("das_master.csv"),
         "provinsi": load_csv("provinsi_master.csv"),
         "kabkota": load_csv("kabkota_master.csv"),
     }
+
+
+def add_total_dan_persen(df: pd.DataFrame, kolom_nilai: str) -> pd.DataFrame:
+    """
+    Tambah kolom '% dari total' dan baris 'TOTAL' di baris paling bawah,
+    dipakai buat tabel rekap luas/panjang di semua halaman biar konsisten.
+
+    Params:
+        df: DataFrame yang mau ditambahin (harus udah dalam bentuk final utk ditampilkan)
+        kolom_nilai: nama kolom angka yang jadi dasar hitung persentase & total (misal "Luas (km²)")
+    """
+    if df.empty:
+        return df
+
+    df = df.copy()
+    total = df[kolom_nilai].sum()
+    df["% dari total"] = (df[kolom_nilai] / total * 100).round(1) if total else 0.0
+
+    # Baris TOTAL - kolom non-angka diisi "TOTAL" di kolom pertama, kosong di kolom lain
+    baris_total = {col: "" for col in df.columns}
+    baris_total[df.columns[0]] = "TOTAL"
+    baris_total[kolom_nilai] = round(total, 2)
+    baris_total["% dari total"] = 100.0
+
+    return pd.concat([df, pd.DataFrame([baris_total])], ignore_index=True)

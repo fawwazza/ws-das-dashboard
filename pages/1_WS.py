@@ -3,7 +3,7 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 
-from utils import load_csv, load_geojson, COL_WS_NAME, COL_PROVINSI_NAME, COL_KABKOTA_NAME
+from utils import load_csv, load_geojson, COL_WS_NAME, COL_PROVINSI_NAME, COL_KABKOTA_NAME, add_total_dan_persen
 
 st.title("Eksplorasi Wilayah Sungai (WS)")
 
@@ -58,6 +58,8 @@ with col_detail:
         c2.metric("Jumlah DAS", f"{int(row['jumlah_das'])}")
         if "kode_ws" in row.index and pd.notna(row.get("kode_ws")):
             st.caption(f"Kode WS: {row['kode_ws']}")
+        if "status_ws" in row.index and pd.notna(row.get("status_ws")):
+            st.markdown(f"**Status WS:** {row['status_ws']}")
 
     st.markdown("**Provinsi yang dilintasi**")
     prov_ws = (
@@ -66,6 +68,7 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_PROVINSI_NAME: "Provinsi", "luas_km2": "Luas (km²)"})
     )
+    prov_ws = add_total_dan_persen(prov_ws, "Luas (km²)")
     st.dataframe(prov_ws, hide_index=True, use_container_width=True)
 
     st.markdown("**Kab/Kota yang dilintasi**")
@@ -75,4 +78,5 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_KABKOTA_NAME: "Kab/Kota", "luas_km2": "Luas (km²)"})
     )
+    kab_ws = add_total_dan_persen(kab_ws, "Luas (km²)")
     st.dataframe(kab_ws, hide_index=True, use_container_width=True, height=250)

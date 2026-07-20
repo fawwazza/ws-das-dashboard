@@ -3,7 +3,7 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 
-from utils import load_csv, load_geojson, COL_DAS_NAME, COL_DAS_WS_INDUK, COL_PROVINSI_NAME, COL_KABKOTA_NAME
+from utils import load_csv, load_geojson, COL_DAS_NAME, COL_DAS_WS_INDUK, COL_PROVINSI_NAME, COL_KABKOTA_NAME, add_total_dan_persen
 
 st.title("Eksplorasi Daerah Aliran Sungai (DAS)")
 st.caption(
@@ -70,9 +70,34 @@ with col_detail:
     row = das_master[das_master["nama_das"] == das_terpilih]
     if not row.empty:
         row = row.iloc[0]
+
         c1, c2 = st.columns(2)
-        c1.metric("Luas DAS", f"{row['luas_das_km2']:,.1f} km²")
-        c2.metric("WS Induk", row["nama_ws_induk"])
+
+        with c1:
+            st.metric("Luas DAS", f"{row['luas_das_km2']:,.1f} km²")
+
+        with c2:
+            st.markdown(f"""
+            <div style="
+                border:1px solid #e6e6e6;
+                border-left:4px solid #f0b400;
+                border-radius:8px;
+                padding:16px;
+                min-height:88px;
+            ">
+                <div style="font-size:14px;color:#6b7280;">
+                    WS Induk
+                </div>
+                <div style="
+                    font-size:18px;
+                    font-weight:600;
+                    margin-top:6px;
+                    word-wrap:break-word;
+                ">
+                    {row["nama_ws_induk"]}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
     st.markdown("**Provinsi yang dilintasi**")
     prov_das = (
@@ -81,6 +106,7 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_PROVINSI_NAME: "Provinsi", "luas_km2": "Luas (km²)"})
     )
+    prov_das = add_total_dan_persen(prov_das, "Luas (km²)")
     st.dataframe(prov_das, hide_index=True, use_container_width=True)
 
     st.markdown("**Kab/Kota yang dilintasi**")
@@ -90,14 +116,19 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_KABKOTA_NAME: "Kab/Kota", "luas_km2": "Luas (km²)"})
     )
+    kab_das = add_total_dan_persen(kab_das, "Luas (km²)")
     st.dataframe(kab_das, hide_index=True, use_container_width=True, height=250)
 
     st.divider()
     st.markdown(f"**Semua DAS dalam WS {ws_terpilih}** ({len(das_dalam_ws)} DAS)")
-    st.dataframe(
+    tabel_das_dalam_ws = (
         das_dalam_ws[["nama_das", "luas_das_km2"]]
         .sort_values("luas_das_km2", ascending=False)
-        .rename(columns={"nama_das": "Nama DAS", "luas_das_km2": "Luas (km²)"}),
+        .rename(columns={"nama_das": "Nama DAS", "luas_das_km2": "Luas (km²)"})
+    )
+    tabel_das_dalam_ws = add_total_dan_persen(tabel_das_dalam_ws, "Luas (km²)")
+    st.dataframe(
+        tabel_das_dalam_ws,
         hide_index=True,
         use_container_width=True,
         height=250,

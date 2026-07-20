@@ -2,7 +2,7 @@ import streamlit as st
 import folium
 from streamlit_folium import st_folium
 
-from utils import load_csv, load_geojson, COL_KABKOTA_NAME, COL_WS_NAME, COL_DAS_NAME
+from utils import load_csv, load_geojson, COL_KABKOTA_NAME, COL_WS_NAME, COL_DAS_NAME, add_total_dan_persen
 
 st.title("Eksplorasi per Kabupaten/Kota")
 
@@ -52,9 +52,9 @@ with col_detail:
         c1, c2 = st.columns(2)
         c1.metric("Jumlah WS", f"{int(row['jumlah_ws'])}")
         c2.metric("Jumlah DAS", f"{int(row['jumlah_das'])}")
-        c3, c4 = st.columns(2)
-        c3.metric("Luas WS di sini", f"{row['luas_ws_km2']:,.1f} km²")
-        c4.metric("Luas DAS di sini", f"{row['luas_das_km2']:,.1f} km²")
+        # Sama kayak halaman Provinsi: Luas WS & Luas DAS di sini secara teori
+        # nilainya sama, jadi cukup 1 metric aja.
+        st.metric("Luas Kab/Kota", f"{row['luas_ws_km2']:,.1f} km²")
 
     st.markdown("**Wilayah Sungai (WS) di kab/kota ini**")
     ws_di_kabkota = (
@@ -63,6 +63,7 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_WS_NAME: "WS", "luas_km2": "Luas (km²)"})
     )
+    ws_di_kabkota = add_total_dan_persen(ws_di_kabkota, "Luas (km²)")
     st.dataframe(ws_di_kabkota, hide_index=True, use_container_width=True, height=200)
 
     st.markdown("**DAS di kab/kota ini**")
@@ -72,6 +73,7 @@ with col_detail:
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_DAS_NAME: "DAS", "luas_km2": "Luas (km²)"})
     )
+    das_di_kabkota = add_total_dan_persen(das_di_kabkota, "Luas (km²)")
     st.dataframe(das_di_kabkota, hide_index=True, use_container_width=True, height=250)
     st.caption(
         "Catatan: nama DAS bisa muncul lebih dari sekali di seluruh dataset "
