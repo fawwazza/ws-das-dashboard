@@ -28,8 +28,8 @@ st.markdown(
         text-overflow: unset !important;
     }
     [data-testid="stMetric"] {
-        background-color: #FAFAFA;
-        border: 1px solid #E8E8E8;
+        background-color: #F0F4F8;
+        border: 1px solid #D5E0EB;
         border-left: 4px solid #F2B705;
         border-radius: 6px;
         padding: 10px 14px;
@@ -96,6 +96,7 @@ pg = st.navigation(
         st.Page("pages/3_Provinsi.py", title="Provinsi"),
         st.Page("pages/4_KabKota.py", title="Kab/Kota"),
         st.Page("pages/5_Clipping_Tool.py", title="Clipping Tool"),
+        st.Page("pages/6_Data_Nasional.py", title="Unduh Data Nasional"),
     ]
 )
 pg.run()

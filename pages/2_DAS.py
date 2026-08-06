@@ -70,34 +70,22 @@ with col_detail:
     row = das_master[das_master["nama_das"] == das_terpilih]
     if not row.empty:
         row = row.iloc[0]
-
         c1, c2 = st.columns(2)
-
-        with c1:
-            st.metric("Luas DAS", f"{row['luas_das_km2']:,.1f} km²")
-
+        c1.metric("Luas DAS", f"{row['luas_das_km2']:,.1f} km²")
         with c2:
-            st.markdown(f"""
-            <div style="
-                border:1px solid #e6e6e6;
-                border-left:4px solid #f0b400;
-                border-radius:8px;
-                padding:16px;
-                min-height:88px;
-            ">
-                <div style="font-size:14px;color:#6b7280;">
-                    WS Induk
+            st.markdown(
+                f"""
+                <div style="background-color:#F0F4F8;border:1px solid #D5E0EB;
+                            border-left:4px solid #F2B705;border-radius:6px;
+                            padding:10px 14px;height:100%;">
+                    <div style="font-size:0.875rem;color:#5c6b7a;margin-bottom:2px;">WS Induk</div>
+                    <div style="font-size:1.3rem;font-weight:600;color:#1A2B47;line-height:1.3;">
+                        {row['nama_ws_induk']}
+                    </div>
                 </div>
-                <div style="
-                    font-size:18px;
-                    font-weight:600;
-                    margin-top:6px;
-                    word-wrap:break-word;
-                ">
-                    {row["nama_ws_induk"]}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+                """,
+                unsafe_allow_html=True,
+            )
 
     st.markdown("**Provinsi yang dilintasi**")
     prov_das = (
