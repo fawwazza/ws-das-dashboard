@@ -25,13 +25,13 @@ with col_peta:
     st.subheader("Peta")
 
     # Peta dasar, pusat di Indonesia
-    m = folium.Map(location=[-2.5, 118], zoom_start=5, tiles="CartoDB positron")
+    m = folium.Map(location=[-2.5, 118], zoom_start=5, tiles="OpenStreetMap")
 
     def style_function(feature):
         nama = feature["properties"].get(COL_WS_NAME)
         if nama == ws_terpilih:
-            return {"fillColor": "#2563eb", "color": "#1e3a8a", "weight": 2, "fillOpacity": 0.6}
-        return {"fillColor": "#94a3b8", "color": "#64748b", "weight": 0.5, "fillOpacity": 0.15}
+           return {"fillColor": "#E80000", "color": "#BC0000", "weight": 2, "fillOpacity": 0.5}
+        return {"fillColor": "#545e6a", "color": "#64748b", "weight": 0.7, "fillOpacity": 0.25}
 
     folium.GeoJson(
         ws_geo,

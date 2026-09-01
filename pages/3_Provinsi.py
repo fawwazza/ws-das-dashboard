@@ -30,12 +30,12 @@ with col_peta:
         bounds = geo_terpilih.total_bounds
         center_lat = (bounds[1] + bounds[3]) / 2
         center_lon = (bounds[0] + bounds[2]) / 2
-        m = folium.Map(location=[center_lat, center_lon], tiles="CartoDB positron")
+        m = folium.Map(location=[center_lat, center_lon], tiles="OpenStreetMap")
 
         folium.GeoJson(
             geo_terpilih,
             style_function=lambda f: {
-                "fillColor": "#f59e0b", "color": "#92400e", "weight": 2, "fillOpacity": 0.5
+                "fillColor": "#E80000", "color": "#BC0000", "weight": 2, "fillOpacity": 0.5
             },
             tooltip=folium.GeoJsonTooltip(fields=[COL_PROVINSI_NAME], aliases=["Provinsi:"]),
         ).add_to(m)

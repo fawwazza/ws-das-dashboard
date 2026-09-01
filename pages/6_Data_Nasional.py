@@ -6,16 +6,21 @@ from utils import load_csv
 from drive_utils import download_file_bytes
 
 st.title("Unduh Data Nasional per WS")
-st.caption(
-    "Data Nasional yang sudah di-clip "
+st.markdown(
+    "Data Nasional yang sudah di-clip \n"
     "per Wilayah Sungai. Pilih WS, lalu pilih layer yang ingin diunduh."
 )
 st.caption(
-    "Data Erosi. Sumber: KLHK 2022. Skala 1:250.000. \n \n"
-    "Data Jenis Tanah. Sumber: FAO UNESCO 2007. Skala 1:3.000.000. \n \n"
-    "Data Kawasan Hutan. Sumber: KEMENHUT 2024. Skala 1:50.000. \n \n"
-    "Data RURHL DAS. Sumber: KEMENHUT 2025. Skala 1:50.000. \n \n"
-    "Data Tutupan Lahan/Penutupan Lahan. Sumber: KLHK 2024. Skala 1:50.000. \n \n"
+    "Data Wilayah Sungai. Sumber: Kementerian PU 2026. Skala 1:50.000. <br>"
+    "Data DAS. Sumber: Kementerian Kehutanan 2025. Skala 1:50.000. <br>"
+    "Data Jaringan Sungai. Sumber: Kementerian PU 2026. Skala 1:50.000. <br>"
+    "Data Cekungan Air Tanah. Sumber: Kementerian ESDM 2026. Skala 1:50.000. <br>"
+    "Data Erosi. Sumber: Kementerian KLHK 2022. Skala 1:250.000. <br>"
+    "Data Jenis Tanah. Sumber: FAO UNESCO 2007. Skala 1:3.000.000. <br>"
+    "Data Kawasan Hutan. Sumber: Kementerian Kehutanan 2024. Skala 1:50.000. <br>"
+    "Data Rencana Umum Rehabilitasi Hutan dan Lahan - DAS (RURHL-DAS). Sumber: Kementerian Kehutanan 2025. Skala 1:50.000. <br>"
+    "Data Tutupan Lahan/Penutupan Lahan. Sumber: Kementerian PU 2024. Skala 1:50.000. <br>",
+    unsafe_allow_html=True,
 )
 
 st.divider()

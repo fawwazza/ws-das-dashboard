@@ -39,7 +39,7 @@ das_geo_dalam_ws = das_geo_full[das_geo_full[COL_DAS_WS_INDUK] == ws_terpilih]
 col_peta, col_detail = st.columns([1.4, 1])
 
 with col_peta:
-    st.subheader(f"Peta DAS dalam WS {ws_terpilih}")
+    st.subheader(f"Peta DAS dalam {ws_terpilih}")
 
     if das_geo_dalam_ws.empty:
         st.info("Geometri DAS untuk WS ini tidak ditemukan di file geojson.")
@@ -47,13 +47,13 @@ with col_peta:
         bounds = das_geo_dalam_ws.total_bounds
         center_lat = (bounds[1] + bounds[3]) / 2
         center_lon = (bounds[0] + bounds[2]) / 2
-        m = folium.Map(location=[center_lat, center_lon], tiles="CartoDB positron")
+        m = folium.Map(location=[center_lat, center_lon], tiles="OpenStreetMap")
 
         def style_function(feature):
             nama = feature["properties"].get(COL_DAS_NAME)
             if nama == das_terpilih:
-                return {"fillColor": "#16a34a", "color": "#14532d", "weight": 2, "fillOpacity": 0.65}
-            return {"fillColor": "#94a3b8", "color": "#64748b", "weight": 0.7, "fillOpacity": 0.25}
+                return {"fillColor": "#E80000", "color": "#BC0000", "weight": 2, "fillOpacity": 0.5}
+            return {"fillColor": "#545e6a", "color": "#64748b", "weight": 0.7, "fillOpacity": 0.25}
 
         folium.GeoJson(
             das_geo_dalam_ws,
