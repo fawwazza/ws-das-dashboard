@@ -68,8 +68,8 @@ with col_detail:
     st.subheader(das_terpilih)
 
     row = das_master[
-        (das_master[COL_DAS_NAME] == das_terpilih)
-        & (das_master[COL_DAS_WS_INDUK] == ws_terpilih)
+    (das_master["nama_das"] == das_terpilih)
+    & (das_master["nama_ws_induk"] == ws_terpilih)
     ]
     if not row.empty:
         row = row.iloc[0]
@@ -94,7 +94,7 @@ with col_detail:
     prov_das = (
         das_provinsi[
             (das_provinsi[COL_DAS_NAME] == das_terpilih)
-            & (das_provinsi[COL_DAS_WS_INDUK] == ws_terpilih)
+            & (das_provinsi["nama_ws_induk"] == ws_terpilih)
         ][[COL_PROVINSI_NAME, "luas_km2"]]
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_PROVINSI_NAME: "Provinsi", "luas_km2": "Luas (km²)"})
@@ -106,7 +106,7 @@ with col_detail:
     kab_das = (
         das_kabkota[
             (das_kabkota[COL_DAS_NAME] == das_terpilih)
-            & (das_kabkota[COL_DAS_WS_INDUK] == ws_terpilih)
+            & (das_kabkota["nama_ws_induk"] == ws_terpilih)
         ][[COL_KABKOTA_NAME, "luas_km2"]]
         .sort_values("luas_km2", ascending=False)
         .rename(columns={COL_KABKOTA_NAME: "Kab/Kota", "luas_km2": "Luas (km²)"})
